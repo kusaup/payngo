@@ -1,0 +1,28 @@
+<main class="dashboard">
+  <header>
+    <div>
+      <p class="eyebrow">Welcome back</p>
+      <h1>Portfolio Dashboard</h1>
+    </div>
+    <a routerLink="/signin">Sign out</a>
+  </header>
+
+  <section class="cards">
+    @for (card of cards; track card.title) {
+      <article>
+        <p>{{ card.title }}</p>
+        <h2>{{ card.value }}</h2>
+        <small>{{ card.change }}</small>
+      </article>
+    }
+  </section>
+
+  <section class="activity">
+    <h3>Recent Activity</h3>
+    <ul>
+      <li><span>+ 0.58 BTC</span><strong>From staking rewards</strong></li>
+      <li><span>- 1.00 ETH</span><strong>Sent to cold wallet</strong></li>
+      <li><span>+ $4,000 USDT</span><strong>P2P exchange settlement</strong></li>
+    </ul>
+  </section>
+</main>
