@@ -1,0 +1,44 @@
+<section class="auth-shell">
+  <div class="brand-panel">
+    <p class="badge">PaynGo Crypto</p>
+    <h1>Banking for the digital asset era.</h1>
+    <p>
+      Secure your portfolio, move funds globally, and track your assets from one sleek dashboard.
+    </p>
+  </div>
+
+  <form class="auth-card" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h2>{{ isSignup() ? 'Create Account' : 'Sign In' }}</h2>
+
+    @if (isSignup()) {
+      <label>
+        Full Name
+        <input type="text" formControlName="fullName" placeholder="Ada Lovelace" />
+      </label>
+    }
+
+    <label>
+      Email
+      <input type="email" formControlName="email" placeholder="you@payngo.com" />
+    </label>
+
+    <label>
+      Password
+      <input type="password" formControlName="password" placeholder="••••••••" />
+    </label>
+
+    <label class="remember">
+      <input type="checkbox" formControlName="remember" /> Keep me signed in
+    </label>
+
+    <button type="submit">{{ isSignup() ? 'Sign Up' : 'Sign In' }}</button>
+
+    <p class="toggle">
+      @if (isSignup()) {
+        Already have an account? <a routerLink="/signin">Sign in</a>
+      } @else {
+        New here? <a routerLink="/signup">Create account</a>
+      }
+    </p>
+  </form>
+</section>
