@@ -1,9 +1,0 @@
-{
-  "title": "Finaliser le paiement",
-  "selectAsset": "Sélectionnez la crypto et le réseau",
-  "payNow": "Payer",
-  "waiting": "En attente de confirmation blockchain",
-  "success": "Paiement confirmé",
-  "failed": "Paiement échoué",
-  "redirecting": "Redirection..."
-}

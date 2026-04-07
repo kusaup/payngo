@@ -1,9 +1,0 @@
-{
-  "title": "Complete payment",
-  "selectAsset": "Select coin and network",
-  "payNow": "Pay now",
-  "waiting": "Waiting for blockchain confirmation",
-  "success": "Payment confirmed",
-  "failed": "Payment failed",
-  "redirecting": "Redirecting..."
-}
