@@ -10,7 +10,7 @@ import { Payment, PaymentStatus } from './schemas/payment.schema';
 import { User } from '../users/schemas/user.schema';
 import { AssetsService } from '../assets/assets.service';
 import { PriceService } from '../price/price.service';
-import { CryptoService } from '../crypto/services/crypto.service';
+import { CryptoAdapterService } from '../crypto-adapter/crypto-adapter.service';
 import { AesEncryptionUtil } from '../../common/utils/crypto.util';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class PaymentsService {
     @InjectQueue('payment-monitor') private readonly monitorQueue: Queue,
     private readonly assetsService: AssetsService,
     private readonly priceService: PriceService,
-    private readonly cryptoService: CryptoService,
+    private readonly cryptoAdapter: CryptoAdapterService,
     private readonly config: ConfigService,
   ) {
     this.encryption = new AesEncryptionUtil(this.config.get<string>('app.encryptionMasterKey')!);
@@ -73,7 +73,7 @@ export class PaymentsService {
 
     const rate = await this.priceService.getFreshPriceOrThrow(dto.coin);
     const expectedAmount = payment.amountUSD / rate;
-    const wallet = await this.cryptoService.generateWallet(`${dto.coin}_${dto.network}`);
+    const wallet = await this.cryptoAdapter.createDepositWallet(dto.coin, dto.network);
 
     await this.paymentModel.updateOne(
       { _id: id, status: PaymentStatus.PENDING },

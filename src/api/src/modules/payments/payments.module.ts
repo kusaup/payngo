@@ -7,7 +7,7 @@ import { Payment, PaymentSchema } from './schemas/payment.schema';
 import { User, UserSchema } from '../users/schemas/user.schema';
 import { AssetsModule } from '../assets/assets.module';
 import { PriceModule } from '../price/price.module';
-import { CryptoModule } from '../crypto/crypto.module';
+import { CryptoAdapterModule } from '../crypto-adapter/crypto-adapter.module';
 import { PaymentMonitorProcessor } from './queues/payment-monitor.processor';
 
 @Module({
@@ -19,7 +19,7 @@ import { PaymentMonitorProcessor } from './queues/payment-monitor.processor';
     BullModule.registerQueue({ name: 'payment-monitor' }, { name: 'webhook-delivery' }),
     AssetsModule,
     PriceModule,
-    CryptoModule,
+    CryptoAdapterModule,
   ],
   controllers: [PaymentsController],
   providers: [PaymentsService, PaymentMonitorProcessor],

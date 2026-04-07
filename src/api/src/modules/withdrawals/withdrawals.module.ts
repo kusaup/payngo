@@ -5,13 +5,13 @@ import { Withdrawal, WithdrawalSchema } from './schemas/withdrawal.schema';
 import { WithdrawalsController } from './withdrawals.controller';
 import { WithdrawalsService } from './withdrawals.service';
 import { WithdrawalProcessor } from './queues/withdrawal.processor';
-import { CryptoModule } from '../crypto/crypto.module';
+import { CryptoAdapterModule } from '../crypto-adapter/crypto-adapter.module';
 
 @Module({
   imports: [
     BullModule.registerQueue({ name: 'withdrawal-exec' }),
     MongooseModule.forFeature([{ name: Withdrawal.name, schema: WithdrawalSchema }]),
-    CryptoModule,
+    CryptoAdapterModule,
   ],
   controllers: [WithdrawalsController],
   providers: [WithdrawalsService, WithdrawalProcessor],

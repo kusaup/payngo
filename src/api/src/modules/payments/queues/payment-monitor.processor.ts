@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ConfigService } from '@nestjs/config';
 import { Payment, PaymentStatus } from '../schemas/payment.schema';
-import { CryptoService } from '../../crypto/services/crypto.service';
+import { CryptoAdapterService } from '../../crypto-adapter/crypto-adapter.service';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
 
@@ -12,7 +12,7 @@ import { Queue } from 'bullmq';
 export class PaymentMonitorProcessor extends WorkerHost {
   constructor(
     @InjectModel(Payment.name) private readonly paymentModel: Model<Payment>,
-    private readonly cryptoService: CryptoService,
+    private readonly cryptoAdapter: CryptoAdapterService,
     private readonly config: ConfigService,
     @InjectQueue('webhook-delivery') private readonly webhookQueue: Queue,
   ) {
@@ -28,9 +28,7 @@ export class PaymentMonitorProcessor extends WorkerHost {
       return;
     }
 
-    const symbol = `${payment.selectedCoin}_${payment.selectedNetwork}`;
-    const received = await this.cryptoService.getBalance(symbol, payment.depositAddress);
-    const chain = { totalReceived: received, txHash: undefined };
+    const chain = await this.cryptoAdapter.getReceived(payment.selectedCoin!, payment.selectedNetwork!, payment.depositAddress);
     if ((chain.totalReceived || 0) <= 0) {
       throw new Error('No payment yet');
     }

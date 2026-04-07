@@ -14,7 +14,7 @@ import { WebhooksModule } from './modules/webhooks/webhooks.module';
 import { WithdrawalsModule } from './modules/withdrawals/withdrawals.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { AdminModule } from './modules/admin/admin.module';
-import { CryptoModule } from './modules/crypto/crypto.module';
+import { CryptoAdapterModule } from './modules/crypto-adapter/crypto-adapter.module';
 
 @Module({
   imports: [
@@ -40,7 +40,7 @@ import { CryptoModule } from './modules/crypto/crypto.module';
     WithdrawalsModule,
     DashboardModule,
     AdminModule,
-    CryptoModule,
+    CryptoAdapterModule,
   ],
 })
 export class AppModule {}
