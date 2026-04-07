@@ -1,0 +1,4 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, Arial, sans-serif; background: #fff; }
+button { border: 1px solid #ccc; border-radius: 8px; padding: 8px 12px; background: #fafafa; }
+@media (max-width: 420px) { .wrap { padding: 12px; } }
