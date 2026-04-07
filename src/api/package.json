@@ -1,16 +1,5 @@
 {
-  "name": "payngo-monorepo",
-  "private": true,
-  "workspaces": [
-    "src/api",
-    "src/client"
-  ],
-  "scripts": {
-    "start:api": "npm --workspace src/api run start:dev",
-    "start:client": "npm --workspace src/client run start",
-    "build:api": "npm --workspace src/api run build",
-    "build:client": "npm --workspace src/client run build"
-  "name": "payngo-gateway",
+  "name": "payngo-api",
   "version": "1.0.0",
   "private": true,
   "scripts": {
